@@ -4,7 +4,7 @@ const pass = document.querySelector(".input1000")
 
 function login(){
 
-    fetch("http://localhost:8080/signin",{
+    fetch("http://fala-fatec.herokuapp.com/signin",{
         headers: {
             'Accept':'application/json',
             'Content-Type':'application/json'

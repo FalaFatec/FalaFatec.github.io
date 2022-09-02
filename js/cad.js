@@ -6,7 +6,7 @@ const pass = document.querySelector(".input1000")
 
 function cadastro(){
 
-    fetch("http://localhost:8080/signup",{
+    fetch("http://fala-fatec.herokuapp.com/signup",{
         headers: {
             'Accept':'application/json',
             'Content-Type':'application/json'
