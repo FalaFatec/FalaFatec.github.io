@@ -127,18 +127,10 @@ function saveEvent() {
   }
 }
 
-function onEdit(pal) {
-  selectedRow = pal.parentElement.parentElement;
-  document.getElementById("eventTitleInput").value = selectedRow.cells[0].innerHTML;
-  document.getElementById("eventDescInput").value = selectedRow.cells[1].innerHTML;
-  document.getElementById("eventPalInput").value = selectedRow.cells[2].innerHTML;
-  document.getElementById("eventHoraInput").value = selectedRow.cells[3].innerHTML;
-}
-function updateRecord(events) {
-  selectedRow.cells[0].innerHTML = events.title;
-  selectedRow.cells[1].innerHTML = events.desc;
-  selectedRow.cells[2].innerHTML = events.pal;
-  selectedRow.cells[3].innerHTML = events.hora;
+function onEditPressed(){
+
+  alert("teste");
+
 }
 
 function deleteEvent() {
@@ -162,7 +154,7 @@ function initButtons() {
   document.getElementById('cancelButton').addEventListener('click', closeModal);
   document.getElementById('deleteButton').addEventListener('click', deleteEvent);
   document.getElementById('closeButton').addEventListener('click', closeModal);
-  document.getElementById('editButton').addEventListener('click', onEdit);
+  document.getElementById('editButton').addEventListener('click', onEditPressed);
 }
 
 initButtons();
