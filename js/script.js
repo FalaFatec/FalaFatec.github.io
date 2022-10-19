@@ -105,7 +105,7 @@ function closeModal() {
 
 function callApi(events) {
 
-  fetch("http://localhost:8080/evento",{
+  fetch("https://fala-fatec.herokuapp.com/evento",{
     headers: {
         'Accept':'application/json',
         'Content-Type':'application/json'
@@ -169,7 +169,7 @@ function onEditPressed(){
 function deleteApi(events, delData){
   const element = document.querySelector('#delete-request-set-headers .status');
 
-  fetch('http://localhost:8080/evento/data?data=' + delData, {
+  fetch('https://fala-fatec.herokuapp.com/evento/data?data=' + delData, {
     method: 'DELETE', headers: { 'Content-type': 'application/json; charset=UTF-8'},
   })
   
