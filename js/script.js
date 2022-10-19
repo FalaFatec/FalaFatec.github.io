@@ -12,6 +12,7 @@ const eventPalInput = document.getElementById('eventPalInput');
 const eventHoraInput = document.getElementById('eventHoraInput');
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
+
 function openModal(date) {
   clicked = date;
 
@@ -25,7 +26,6 @@ function openModal(date) {
   } else {
     newEventModal.style.display = 'block';
   }
-
   backDrop.style.display = 'block';
 }
 
@@ -86,6 +86,7 @@ function load() {
   }
 }
 
+
 function closeModal() {
   eventTitleInput.classList.remove('error');
   eventDescInput.classList.remove('error');
@@ -102,7 +103,24 @@ function closeModal() {
   load();
 }
 
+function callApi(events) {
+
+  fetch("http://localhost:8080/evento",{
+    headers: {
+        'Accept':'application/json',
+        'Content-Type':'application/json'
+    },
+    method: "POST", redirect: 'manual',
+    body: JSON.stringify({nome: eventTitleInput.value, descricao: eventDescInput.value, palestrante: eventPalInput.value,
+    hora: eventHoraInput.value, data: Object.values(events.find((e => e.date === clicked)))[0]})
+})
+.catch(function(err) {
+    console.info(err);
+});
+};
+
 function saveEvent() {
+
   if (eventTitleInput.value && eventDescInput.value && eventPalInput.value && eventHoraInput.value) {
     eventTitleInput.classList.remove('error');
     eventDescInput.classList.remove('error');
@@ -116,8 +134,14 @@ function saveEvent() {
       pal: eventPalInput.value,
       hora: eventHoraInput.value,
     });
-
+    //console.log(Object.values(events.find((e => e.date === clicked)))[0]);
+    //console.log(events.find(e => e.date === clicked));
+    //const keys = Object.keys(events);
+    //console.log(Object.values(events => events.date)[0]);
+    
+    callApi(events);
     localStorage.setItem('events', JSON.stringify(events));
+    
     closeModal();
   } else {
     eventTitleInput.classList.add('error');
@@ -127,23 +151,49 @@ function saveEvent() {
   }
 }
 
-function onEdit(pal) {
-  selectedRow = pal.parentElement.parentElement;
-  document.getElementById("eventTitleInput").value = selectedRow.cells[0].innerHTML;
-  document.getElementById("eventDescInput").value = selectedRow.cells[1].innerHTML;
-  document.getElementById("eventPalInput").value = selectedRow.cells[2].innerHTML;
-  document.getElementById("eventHoraInput").value = selectedRow.cells[3].innerHTML;
+function onEditPressed(){
+
+  openModal();
+  deleteEventModal.style.display = 'none';
+  var events = localStorage.getItem('events')
+  events['events'] = eventTitleInput.value,  eventDescInput.value, eventPalInput.value, eventHoraInput.value;
+
+  localStorage.setItem('events', JSON.stringify(events));
+
+  //closeModal();
+  //saveEvent();
+
+
 }
-function updateRecord(events) {
-  selectedRow.cells[0].innerHTML = events.title;
-  selectedRow.cells[1].innerHTML = events.desc;
-  selectedRow.cells[2].innerHTML = events.pal;
-  selectedRow.cells[3].innerHTML = events.hora;
+
+function deleteApi(events, delData){
+  const element = document.querySelector('#delete-request-set-headers .status');
+
+  fetch('http://localhost:8080/evento/data?data=' + delData, {
+    method: 'DELETE', headers: { 'Content-type': 'application/json; charset=UTF-8'},
+  })
+  
+/*
+  const element = document.querySelector('#delete-request-set-headers .status');
+  const requestOptions = {
+      method: 'DELETE',
+      headers: { 
+        'Accept':'application/json',
+        'Content-Type':'application/json'
+      }
+  };
+  fetch('http://localhost:8080/evento/data?data=9/29/2022', )
+      .then(() => element.innerHTML = 'Delete successful');
+      */
 }
 
 function deleteEvent() {
+
+  const delData = (Object.values(events.find((e => e.date === clicked)))[0]);
   events = events.filter(e => e.date !== clicked);
+  deleteApi(events, delData);
   localStorage.setItem('events', JSON.stringify(events));
+
   closeModal();
 }
 
@@ -162,7 +212,7 @@ function initButtons() {
   document.getElementById('cancelButton').addEventListener('click', closeModal);
   document.getElementById('deleteButton').addEventListener('click', deleteEvent);
   document.getElementById('closeButton').addEventListener('click', closeModal);
-  document.getElementById('editButton').addEventListener('click', onEdit);
+  //document.getElementById('editButton').addEventListener('click', onEditPressed);
 }
 
 initButtons();
