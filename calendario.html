@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendário de Eventos</title>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="stylesheet" href="./css/calendar.css">
+  
+    <meta name="generator" content="Hugo 0.48" />
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="keywords" content="yeo">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="./css/spectre.css">
+    <link rel="stylesheet" href="./css/yeo.css">
+    <link rel="icon" href="./images/ff.png">
+    
+  </head>
+  <div>
+    <div class="yeo-slogan">
+      <div class="container yeo-header">
+          <div class="columns">
+              <div class="column col-12">
+                  <header class="navbar">
+                      <section class="navbar-section">
+                          <a class="navbar-brand logo" href="home.html">
+                              <img class="logo-img"  src="./images/ff.png" alt=""> <span>Fala Fatec</span>
+                          </a>
+                      </section>
+                      <section class="navbar-section hide-sm">
+                          <a class="btn btn-link" href="">Contato Docente</a>
+                          <a class="btn btn-link" href="">Achados e Perdidos</a>
+                          <a class="btn btn-link" href="calendario.html">Calendario</a>
+                          <a class="btn btn-link" href="">Sugestões</a>
+                      </section>
+                  </header>
+              </div>
+          </div>
+      </div>
+ </div>
+ <center>
+<div>
+    <div id="container">
+      <div id="header">
+        <div id="monthDisplay"></div>
+        
+        <div>
+          <button id="backButton"> ←</button>
+          <button id="nextButton">→</button>
+        </div>
+      </div>
+
+      <div id="weekdays">
+        <div>Domingo</div>
+        <div>Segunda</div>
+        <div>Terça</div>
+        <div>Quarta</div>
+        <div>Quinta</div>
+        <div>Sexta</div>
+        <div>Sábado</div>
+      </div>
+
+      <div id="calendar"></div>
+    </div>
+</div>
+</div>
+    <div id="newEventModal">
+      <h2>Novo Evento</h2>
+      <input id="eventTitleInput" name="nome" placeholder="Titulo do Evento *" />
+      <input id="eventDescInput" name="descricao" placeholder="Descrição *" /> <br>
+      <input id="eventPalInput" name="palestrante" placeholder="Palestrante *" /> <br>
+      <input id="eventHoraInput" type="time" name="hora"  placeholder="Horário * " /> <br>
+
+      <button id="saveButton">Salvar</button>
+      <button id="cancelButton">Cancelar</button>
+    </div>
+
+    <div id="deleteEventModal">
+      <h2>Evento</h2>
+      <p id="eventText"></p>
+
+     <!--<button id="editButton">Editar</button> -->
+      <center><button id="deleteButton">Apagar</button>
+      <button id="closeButton">Fechar</button>
+    </div>
+
+    <div id="modalBackDrop"></div>
+
+    <script src="./js/script.js"></script>
+  </center>
+  </body>
+</html>
