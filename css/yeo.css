@@ -58,7 +58,7 @@ a:active {
 .yeo-slogan {
     background: #005264 center;
     background-size: auto;
-    padding-bottom: 3rem;
+    padding-bottom: 1rem;
 /* Rectangle 10: */
 background-image: -webkit-linear-gradient(44deg, rgb(80, 80, 80) 0%, #d50000 100%);
 background-image: -o-linear-gradient(44deg, rgb(80, 80, 80) 0% , #d50000 100%);
