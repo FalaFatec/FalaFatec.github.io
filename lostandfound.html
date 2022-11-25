@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/lost.css">
     
+    
 </head>
 
 <body>
@@ -44,8 +45,78 @@
 
         <div class="row">
             <div class="col-md-12">
-              <form action="" method="post">
+              <form id="form">
+
                 <br>
+                <fieldset>
+                  
+                  <legend><span class="number">1</span> Informações do item</legend>
+                
+                  <label for="name">Nome:</label>
+                  <input type="text" id="name" name="user_name">
+                
+                  <label for="email">Local:</label>
+                  <input type="text" id="local" name="local">
+               
+                  <label for="password">Data:</label>
+                  <input type="date" id="data" name="data">
+
+                  <label for="bio">Descrição:</label>
+                  <textarea id="bio" name="user_bio"></textarea>
+
+                <input type="file" name="picture" id="file" accept=".jpg">
+            
+            </fieldset>
+
+                <p>
+                <button type="submit"> Cadastrar </button>
+          
+               </form>
+                
+
+               <script>
+
+                document.getElementById('form').addEventListener('submit',function(e){
+
+                const name = document.getElementById('name');
+                const local = document.getElementById('local');
+                const data = document.getElementById('data'); 
+                const bio = document.getElementById('bio');
+ 
+                fetch('https://fala-fatec.herokuapp.com/achadoseperdidos' ,{
+                    headers: {
+                        'Accept':'application/json',
+                        'Content-Type':'application/json'
+                },
+                method: "POST", redirect: 'manual',
+                body: JSON.stringify({nome: name.value, local: local.value, data: data.value, descricao: bio.value})
+                }).catch(function(err) {
+                    console.info(err);
+                });
+                
+
+                })
+
+                document.getElementById('form').addEventListener('submit', function(e){
+                    e.preventDefault();
+                    const userFile = document.getElementById('file').files[0];
+                    const filename = document.getElementById('file').files[0];
+                    
+                    const formData = new FormData();
+                    formData.append('file', userFile,);
+                    
+                    fetch('https://lostandfound-images.herokuapp.com/images/db/upload' ,{
+                        method: "POST",
+                        body: formData,
+                    })
+                        .then(res => res.json())
+                        .then(data => console.log(data))
+                        .catch(err => console.log(err));
+           
+                })
+                
+/**
+ <br>
                 <br>
                 <fieldset>
                   
@@ -63,22 +134,25 @@
                   <label for="bio">Descrição:</label>
                   <textarea id="bio" name="user_bio"></textarea>
 
+               
                   <label class="picture" for="picture__input" tabIndex="0">
                     <span class="picture__image"></span>
                   </label>
-                  
-                  <input type="file" name="picture__input" id="picture__input">
+
+ </fieldset>
+
+<script src="js/Lostandfound.js" defer>
+                    */
 
 
-                 </fieldset>
-               
-                <button type="submit"> Cadastrar </button>
-          
-               </form>
+
+                </script>
+
                 
+
            
        
-            <script src="./js/Lostandfound.js"></script>
+            <!-- <script src="./js/Lostandfound.js"></script> -->
 </body>
 
 </html>
