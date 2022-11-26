@@ -147,12 +147,6 @@ button {
 #eventTitleInput.error {
   border: 2px solid #d30404;
 }
-#eventPalInput.error {
-  border: 2px solid #d30404;
-}
-#eventHoraInput.error {
-  border: 2px solid #d30404;
-}
 #cancelButton, #deleteButton {
   background-color: #d30404;
 }
